@@ -1,19 +1,29 @@
 public abstract class Task {
     private int id;
     private String title;
-    private String status;
+    private Status status;
 
     public Task(int id, String title) {
         this.id = id;
         this.title = title;
-        this.status = "TODO";
+        this.status = Status.TODO;
     }
 
     public abstract int estimatePoints();
 
     public int getId() { return id; }
     public String getTitle() { return title; }
-    public String getStatus() { return status; }
+    public Status getStatus() { return status; }
+
+    public void moveToNext() throws InvalidTransitionException {
+    if (status == Status.TODO) {
+        status = Status.IN_PROGRESS;
+    } else if (status == Status.IN_PROGRESS) {
+        status = Status.DONE;
+    } else {
+        throw new InvalidTransitionException("Task " + id + " is already DONE");
+    }
+}
 
     @Override
     public String toString() {
