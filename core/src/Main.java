@@ -77,6 +77,20 @@ System.out.println("--- Sorted by points (High to low) ---");
 tasks.sort(Comparator.comparingInt(Task::estimatePoints).reversed());
 tasks.forEach(System.out::println);
 
+//
+TaskRepository repo = new TaskRepository();
+for (Task t : tasks) {
+    repo.save(t);
+}
+
+Task found = repo.findById(2).orElseThrow(() -> new TaskNotFoundException(2));
+System.out.println("Found: " + found);
+
+try {
+    repo.findById(99).orElseThrow(() -> new TaskNotFoundException(99));
+} catch (TaskNotFoundException e) {
+    System.out.println("Error: " + e.getMessage());
+}
 
     }
 }
