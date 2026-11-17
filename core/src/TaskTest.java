@@ -23,4 +23,14 @@ public class TaskTest {
         t.moveToNext();
         assertThrows(InvalidTransitionException.class, () -> t.moveToNext());
     }
+
+    @Test
+    void assignToSetsAssignee() {
+        Task t = new Story(1, "Test story");
+        assertNull(t.getAssignee());
+        User suha = new User("Suha", "suha@example.com");
+        t.assignTo(suha);
+        assertEquals(suha, t.getAssignee());
+}
+
 }

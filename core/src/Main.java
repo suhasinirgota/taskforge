@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
@@ -51,5 +51,32 @@ long doneCount = tasks.stream()
                       .filter(t -> t.getStatus() == Status.DONE)
                       .count();
 System.out.println("Done count: " + doneCount);
+
+//
+User suha = new User("Suha", "suha@example.com");
+User ravi = new User("Ravi", "ravi@example.com");
+
+tasks.get(0).assignTo(suha);
+tasks.get(1).assignTo(ravi);
+tasks.get(2).assignTo(suha);
+
+System.out.println("--- Suha's tasks ---");
+tasks.stream()
+     .filter(t -> suha.equals(t.getAssignee()))
+     .forEach(System.out::println);
+
+System.out.println("--- Sorted by points (low to high) ---");
+tasks.sort(Comparator.comparingInt(Task::estimatePoints));
+tasks.forEach(System.out::println);
+
+System.out.println("--- Sorted by title (A to Z) ---");
+tasks.sort(Comparator.comparing(Task::getTitle));
+tasks.forEach(System.out::println);
+
+System.out.println("--- Sorted by points (High to low) ---");
+tasks.sort(Comparator.comparingInt(Task::estimatePoints).reversed());
+tasks.forEach(System.out::println);
+
+
     }
 }

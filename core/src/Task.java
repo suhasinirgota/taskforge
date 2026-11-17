@@ -2,11 +2,15 @@ public abstract class Task {
     private int id;
     private String title;
     private Status status;
+    private User assignee;
 
     public Task(int id, String title) {
         this.id = id;
         this.title = title;
         this.status = Status.TODO;
+    }
+    public void assignTo(User user) {
+        this.assignee = user;
     }
 
     public abstract int estimatePoints();
@@ -14,6 +18,7 @@ public abstract class Task {
     public int getId() { return id; }
     public String getTitle() { return title; }
     public Status getStatus() { return status; }
+    public User getAssignee() { return assignee;}
 
     public void moveToNext() throws InvalidTransitionException {
     if (status == Status.TODO) {
