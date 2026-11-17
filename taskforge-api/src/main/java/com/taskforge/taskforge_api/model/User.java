@@ -1,3 +1,5 @@
+package com.taskforge.taskforge_api.model;
+
 import java.util.Objects;
 
 public class User {

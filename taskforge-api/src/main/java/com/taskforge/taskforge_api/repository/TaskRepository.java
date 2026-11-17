@@ -1,3 +1,7 @@
+package com.taskforge.taskforge_api.repository;
+import com.taskforge.taskforge_api.model.Status;
+import com.taskforge.taskforge_api.model.Task;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

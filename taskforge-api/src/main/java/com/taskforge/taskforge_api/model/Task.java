@@ -1,3 +1,5 @@
+package com.taskforge.taskforge_api.model;
+import com.taskforge.taskforge_api.exception.InvalidTransitionException;
 public abstract class Task {
     private int id;
     private String title;
