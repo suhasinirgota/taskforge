@@ -7,21 +7,31 @@ import com.taskforge.taskforge_api.model.Bug;
 import com.taskforge.taskforge_api.model.Epic;
 import com.taskforge.taskforge_api.model.Story;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 @Repository 
 public class TaskRepository {
-    private final Map<Integer, Task> tasks = new HashMap<>();
-    public TaskRepository() {
+    private final Map<Integer, Task> tasks = new ConcurrentHashMap<>();
+    private final AtomicInteger idCounter = new AtomicInteger(3);
+
+public TaskRepository() {
         save(new Story(1, "Set up project"));
         save(new Bug(2, "Fix login crash"));
         save(new Epic(3, "User login system"));
     }
+
+    public int nextId() {
+    return idCounter.incrementAndGet();
+    }
+
     public void save(Task task) {
         tasks.put(task.getId(), task);
     }
