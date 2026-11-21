@@ -73,4 +73,10 @@ Example response (201 Created):
 
 ## What I learned
 
-Short notes on OOP design, HashMap vs list lookups, checked vs unchecked exceptions, dependency injection and why DTOs are separate from the domain model.
+- **Inheritance and polymorphism:** `Task` is abstract, and `Bug`, `Story` and `Epic` each calculate their own points. A `List<Task>` still calls the right version at runtime.
+- **Exceptions:** I used a checked exception for a business rule (a task can't move past DONE) and an unchecked one for a missing task, so I know when to use each.
+- **Collections:** a `HashMap` finds a task by id without looping, which is much faster than searching a list.
+- **Dependency injection:** Spring gives the controller its repository, so I never write `new TaskRepository()` myself.
+- **DTOs:** the API returns `TaskResponse`, not the internal `Task`, so the JSON shape stays under my control.
+- **Testing and Git:** I wrote JUnit tests for the domain rules and committed after every step.
+
