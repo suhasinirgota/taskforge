@@ -45,7 +45,7 @@ public class TaskController {
 
     @GetMapping
     public List<TaskResponse> getAll() {
-        return repository.findAll().stream()
+        return repository.findAllWithAssignee().stream()
                 .sorted(Comparator.comparingInt(Task::getId))
                 .map(TaskResponse::from)
                 .toList();
