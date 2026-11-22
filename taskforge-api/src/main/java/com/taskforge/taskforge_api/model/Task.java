@@ -11,7 +11,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+// import jakarta.persistence.Transient;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 @Table(name = "tasks")
@@ -28,7 +31,10 @@ public abstract class Task {
     @Enumerated(EnumType.STRING)
     private Status status = Status.TODO;
 
-    @Transient
+    // @Transient
+    // private User assignee;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "assignee_id")
     private User assignee;
 
     protected Task() {

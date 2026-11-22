@@ -3,7 +3,7 @@ package com.taskforge.taskforge_api.dto;
 import com.taskforge.taskforge_api.model.Status;
 import com.taskforge.taskforge_api.model.Task;
 
-public record TaskResponse(int id, String title, Status status, int points, String type) {
+public record TaskResponse(int id, String title, Status status, int points, String type, String assignee) {
 
     public static TaskResponse from(Task task) {
         return new TaskResponse(
@@ -11,6 +11,23 @@ public record TaskResponse(int id, String title, Status status, int points, Stri
                 task.getTitle(),
                 task.getStatus(),
                 task.estimatePoints(),
-                task.getClass().getSimpleName());
+                task.getClass().getSimpleName(),
+                task.getAssignee() == null ? null : task.getAssignee().getName());
     }
 }
+// package com.taskforge.taskforge_api.dto;
+
+// import com.taskforge.taskforge_api.model.Status;
+// import com.taskforge.taskforge_api.model.Task;
+
+// public record TaskResponse(int id, String title, Status status, int points, String type) {
+
+//     public static TaskResponse from(Task task) {
+//         return new TaskResponse(
+//                 task.getId(),
+//                 task.getTitle(),
+//                 task.getStatus(),
+//                 task.estimatePoints(),
+//                 task.getClass().getSimpleName());
+//     }
+// }

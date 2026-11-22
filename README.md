@@ -9,7 +9,7 @@ A task and sprint tracker backend built from scratch with Java and Spring Boot, 
 - Maven
 - JUnit 5
 - Git and GitHub
-- Planned: MySQL, Spring Data JPA, Docker, GitHub Actions
+- Planned: PostgreSQL, Spring Data JPA, Docker, GitHub Actions
 
 ## Features so far
 
@@ -34,6 +34,7 @@ Requirements: JDK 21 and Git.
 
 ```
 git clone https://github.com/suhasinirgota/taskforge.git
+run docker compose up -d before starting the app
 cd taskforge/taskforge-api
 .\mvnw.cmd spring-boot:run
 ```
@@ -66,7 +67,7 @@ Example response (201 Created):
 
 ## Roadmap
 
-- [ ] Persist data with MySQL and Spring Data JPA
+- [x] Persist data with PostgreSQL and Spring Data JPA
 - [ ] Integration tests and CI with GitHub Actions
 - [ ] Assign tasks to users and manage sprints
 - [ ] Docker support
