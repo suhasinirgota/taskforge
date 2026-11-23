@@ -54,6 +54,10 @@ public abstract class Task {
         this.assignee = user;
     }
 
+    public void rename(String newTitle) {
+    this.title = newTitle;
+    }
+
     public User getAssignee() {
         return assignee;
     }

@@ -29,4 +29,29 @@ public class TaskService {
         }
         return result;
     }
+    @Transactional(rollbackFor = InvalidTransitionException.class)
+    public Task advance(int id) throws InvalidTransitionException {
+        Task task = find(id);
+        task.moveToNext();
+        return repository.save(task);
+    }
+
+    @Transactional
+    public Task rename(int id, String title) {
+        Task task = find(id);
+        task.rename(title);
+        return repository.save(task);
+    }
+
+    @Transactional
+    public void delete(int id) {
+        if (!repository.existsById(id)) {
+            throw new TaskNotFoundException(id);
+        }
+        repository.deleteById(id);
+    }
+
+    private Task find(int id) {
+        return repository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
+    }
 }
