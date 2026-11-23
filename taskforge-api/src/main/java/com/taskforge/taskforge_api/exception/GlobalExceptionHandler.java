@@ -34,4 +34,13 @@ public class GlobalExceptionHandler {
                 "timestamp", LocalDateTime.now().toString());
         return ResponseEntity.badRequest().body(body);
     }
+    @ExceptionHandler(InvalidTransitionException.class)
+    public ResponseEntity<Map<String, Object>> handleInvalidTransition(InvalidTransitionException ex) {
+        Map<String, Object> body = Map.of(
+                "status", 409,
+                "error", "Conflict",
+                "message", ex.getMessage(),
+                "timestamp", LocalDateTime.now().toString());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
+    }
 }
